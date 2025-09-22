@@ -1,4 +1,3 @@
-// ...existing code...
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -13,14 +12,19 @@ const MONGO_URI = process.env.MONGO_URI;
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect(MONGO_URI)
+mongoose
+  .connect(MONGO_URI)
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
+
+// Routes
+const authRoutes = require("./routes/auth");
+app.use("/api/auth", authRoutes);
 
 // Test route
 app.get("/", (req, res) => {
   res.send("Server is running and MongoDB is connected 🚀");
 });
 
+// Start server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-// ...existing code...
