@@ -1,9 +1,8 @@
-import express from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
-import User from "../models/User.js";
-import auth from "../middleware/auth.js";  // ✅ Added middleware
-
+const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
+const auth = require("../middleware/auth");
 const router = express.Router();
 
 // Register
@@ -68,4 +67,4 @@ router.get("/profile", auth, async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
